@@ -25,8 +25,8 @@
 
 LED led[LED_ARRAYS][LED_LOOPS_PER_ARRAY];
 
+//setup runs once at the begining of the program
 void setup() {
-  
   //for loop
     //makes a variable (iterate_a) and gives it a value (0)
     //checks that it is below a certain value (LED_ARRAYS)
@@ -46,8 +46,18 @@ void setup() {
   
 }
 
+//loop runs continually until the power runs out (or is swtiched off)
 void loop() {  
   
-  led[0][0].set_brightness(150);
+  
+  for (int i = 0; i < 255; i++) {
+     led[0][0].set_brightness(i);
+     delay(10);
+  }
+  
+  for (int i = 255; i > 0; i--) {
+     led[0][0].set_brightness(i);
+     delay(10);
+  }
   
 }
