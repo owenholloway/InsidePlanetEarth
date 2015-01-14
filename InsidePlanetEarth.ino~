@@ -23,7 +23,7 @@
      
 */
 
-LED led[LED_ARRAYS][LED_LOOPS_PER_ARRAY];
+LED leds[LED_ARRAYS][LED_LOOPS_PER_ARRAY];
 
 void setup() {
   
@@ -33,21 +33,12 @@ void setup() {
     //then loops and changes the variable (iterate++)
   for (int iterate_a = 0; iterate_a < LED_ARRAYS; iterate_a++) {
     
-    for (int iterate_b = 0; iterate_b < LED_LOOPS_PER_ARRAY; iterate_b++) {
-      
-      led[iterate_a][iterate_b] = *new LED();
-      
+    for (int iterate_b = 0; iterate_b < LED_LOOPS_PER_ARRAY, iterate_b++) {
     }
     
   }
   
-  led[0][0].set_pin_num(12);
-  
-  
 }
 
 void loop() {  
-  
-  led[0][0].set_brightness(150);
-  
 }
