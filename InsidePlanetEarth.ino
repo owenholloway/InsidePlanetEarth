@@ -28,8 +28,10 @@
 
 LED led[LED_ARRAYS][LED_LOOPS_PER_ARRAY];
 
-int brightness = 0;
-int brightChange = 2;
+int brightness[3];
+int baseChange = 5;
+int brightChange[3];
+int brightOffset = 170;
 
 //setup runs once at the begining of the program
 void setup() {
@@ -52,20 +54,41 @@ void setup() {
     
   }
   
-  led[0][0].set_pin_num(12);
+  brightness[0] = 0;
+  brightness[1] = 170;
+  brightness[2] = 85;
+  
+  brightChange[0] = baseChange;
+  brightChange[1] = baseChange;
+  brightChange[2] = -baseChange;
+  
+  led[0][0].set_pin_num(9);
+  led[0][1].set_pin_num(10);
+  led[0][2].set_pin_num(11);
   
   
 }
 
 //loop runs continually until the power runs out (or is swtiched off)
-void loop() {  
+void loop() {
   
-  if (digitalRead(SWITCH_PIN) == LOW) {
-    brightness = brightness + brightChange;
-    led[0][0].set_brightness(brightness);
+  if (digitalRead(SWITCH_PIN) == HIGH) {
+    led[0][0].set_brightness(255);
+    led[0][1].set_brightness(255);
+    led[0][2].set_brightness(255);
     delay(10);
   } else {
-    delay(10);
+      for (int i = 0; i < 3; i++) {
+      
+      brightness[i] += brightChange[i];
+      
+      led[0][i].set_brightness(brightness[i]);
+      delay(10);
+      
+      if (brightness[i] <= 0 || brightness[i] >= 255) {
+        brightChange[i] = -brightChange[i];
+      }
+    }
   }
   
 }
