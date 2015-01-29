@@ -1,4 +1,5 @@
 #include "LED.h"
+#include "Ultrasonic.h"
 
 #define LED_ARRAYS 4
 #define LED_LOOPS_PER_ARRAY 3

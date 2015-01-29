@@ -8,8 +8,7 @@ void LED::set_pin_num(int pin_num_to_set) {
   pinMode(pin_num,OUTPUT);
 }
 
-int LED::get_pin_num() {
-  
+int LED::get_pin_num() {  
   return this->pin_num;
 }
 
@@ -19,4 +18,8 @@ void LED::set_brightness(int brightness_to_set) {
   
   analogWrite(pin_num, brightness);
   
+}
+
+int LED::get_brightness() {
+  return this->brightness;
 }
