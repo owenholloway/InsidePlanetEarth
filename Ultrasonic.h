@@ -8,6 +8,6 @@ class Ultrasonic {
     void set_pin_nums(int trig_pin, int echo_pin);
     int get_distance();
       
-}
+};
 
 #endif

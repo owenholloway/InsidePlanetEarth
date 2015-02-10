@@ -1,0 +1,8 @@
+#remove dead files
+git ls-files --deleted | xargs git rm
+
+#add new and changed files
+git add .
+
+#commit changes
+git commit
