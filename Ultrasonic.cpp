@@ -2,6 +2,10 @@
 #include <Arduino.h>
 
 void Ultrasonic::set_pin_nums(int trig_pin, int echo_pin) {
+  
+  this->trig_pin = trig_pin;
+  this->echo_pin = echo_pin;
+
   pinMode(trig_pin, OUTPUT);
   pinMode(echo_pin, INPUT);
 }
