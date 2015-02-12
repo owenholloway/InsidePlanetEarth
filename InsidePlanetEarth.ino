@@ -33,6 +33,9 @@ int pins1[] = {5,6,7};
 int pins2[] = {8,9,10};
 int pins3[] = {11,44,45};
 
+//How many time to loop the lights before returning to 0
+int lights_loop = 0;
+
 //setup runs once at the begining of the program
 void setup() {
   
@@ -70,6 +73,8 @@ void loop() {
   if (digitalRead(SWITCH_PIN) == HIGH) {
     digitalWrite(STATUS_LED,HIGH);
     
+    lights_loop = 0;
+    
     LED_loop[0].set_static_on(200);
     LED_loop[1].set_static_on(200);
     LED_loop[2].set_static_on(200);
@@ -78,10 +83,37 @@ void loop() {
   } else {
     digitalWrite(STATUS_LED,LOW);
     
-    LED_loop[0].set_led_rotation(LED_loop[0].current_rotation + 1);
-    LED_loop[1].set_led_rotation(LED_loop[1].current_rotation + 1);
-    LED_loop[2].set_led_rotation(LED_loop[2].current_rotation + 1);
-    LED_loop[3].set_led_rotation(LED_loop[3].current_rotation + 1);
+    if (LED_loop[0].is_static_on) {
+      LED_loop[0].set_static_on(0);
+      LED_loop[0].is_static_on = false;
+    }
+    
+    if (LED_loop[1].is_static_on) {
+      LED_loop[1].set_static_on(0);
+      LED_loop[1].is_static_on = false;
+    }
+    
+    if (LED_loop[2].is_static_on) {
+      LED_loop[2].set_static_on(0);
+      LED_loop[2].is_static_on = false;
+    }
+    
+    if (LED_loop[3].is_static_on) {
+      LED_loop[3].set_static_on(0);
+      LED_loop[3].is_static_on = false;
+    }
+    
+    if (lights_loop > 0) {
+      LED_loop[0].set_led_rotation(LED_loop[0].current_rotation + 1);
+      LED_loop[1].set_led_rotation(LED_loop[1].current_rotation + 1);
+      LED_loop[2].set_led_rotation(LED_loop[2].current_rotation + 1);
+      LED_loop[3].set_led_rotation(LED_loop[3].current_rotation + 1);
+    } else {
+      LED_loop[0].set_static_on(0);
+      LED_loop[1].set_static_on(0);
+      LED_loop[2].set_static_on(0);
+      LED_loop[3].set_static_on(0);
+    }
     
     delay(10);
     
