@@ -31,10 +31,13 @@ Loop LED_loop[4];
 int pins0[] = {2,3,4};
 int pins1[] = {5,6,7};
 int pins2[] = {8,9,10};
-int pins3[] = {11,12,13};
+int pins3[] = {11,44,45};
 
 //setup runs once at the begining of the program
 void setup() {
+  
+  // open the serial port at 9600 bps:
+  Serial.begin(9600);
   
   //switch for state
   pinMode(SWITCH_PIN,INPUT);
@@ -46,15 +49,19 @@ void setup() {
   
   LED_loop[0] = *new Loop();
   LED_loop[0].set_pins(pins0);
+  LED_loop[0].current_rotation = 0;
   
   LED_loop[1] = *new Loop();
   LED_loop[1].set_pins(pins1);
+  LED_loop[1].current_rotation = 0;
   
   LED_loop[2] = *new Loop();
   LED_loop[2].set_pins(pins2);  
+  LED_loop[2].current_rotation = 0;
   
   LED_loop[3] = *new Loop();
   LED_loop[3].set_pins(pins3);
+  LED_loop[3].current_rotation = 0;
 }
 
 //loop runs continually until the power runs out (or is swtiched off)
@@ -70,10 +77,14 @@ void loop() {
     
   } else {
     digitalWrite(STATUS_LED,LOW);
-    if (LED_loop[0].is_static_on) LED_loop[0].set_static_on(0);
-    if (LED_loop[1].is_static_on) LED_loop[1].set_static_on(0);
-    if (LED_loop[2].is_static_on) LED_loop[2].set_static_on(0);
-    if (LED_loop[3].is_static_on) LED_loop[3].set_static_on(0);
+    
+    LED_loop[0].set_led_rotation(LED_loop[0].current_rotation + 1);
+    LED_loop[1].set_led_rotation(LED_loop[1].current_rotation + 1);
+    LED_loop[2].set_led_rotation(LED_loop[2].current_rotation + 1);
+    LED_loop[3].set_led_rotation(LED_loop[3].current_rotation + 1);
+    
+    delay(10);
+    
   }
   
 }

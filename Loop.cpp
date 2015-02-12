@@ -3,6 +3,7 @@
 
 void Loop::set_pins(int pins[]) {
   is_static_on = false;
+  current_rotation = 0;
   
   led[0] = *new LED();
   led[1] = *new LED();
@@ -16,9 +17,13 @@ void Loop::set_pins(int pins[]) {
 
 void Loop::set_led_rotation(int rotation) {
   
-  led[0].set_brightness( abs(((rotation - 170) % 510) - 255));
-  led[1].set_brightness( abs(((rotation + 000) % 510) - 255));
-  led[2].set_brightness( abs(((rotation + 170) % 510) - 255));
+  current_rotation = rotation%510;
+  
+  //Serial.println("Rotation:" + current_rotation);
+  
+  led[0].set_brightness( abs(((rotation + 000)%510) - 255));
+  led[1].set_brightness( abs(((rotation + 170)%510) - 255));
+  led[2].set_brightness( abs(((rotation + 340)%510) - 255));
   
 }
 

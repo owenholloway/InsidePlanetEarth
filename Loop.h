@@ -7,9 +7,13 @@ class Loop {
   
   private:
     LED led[3];
+    
   public:
     //Variables
+    
+    //is the loop in a static state currently
     bool is_static_on;
+    int current_rotation;
     
     //Functions
     
@@ -31,6 +35,8 @@ class Loop {
     */
     
     void set_led_rotation(int rotation);
+    
+    int get_led_rotation();
     
     /*
     * Set the loop to be staticly on at the given brightness
