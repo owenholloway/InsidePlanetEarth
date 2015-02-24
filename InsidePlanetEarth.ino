@@ -36,6 +36,8 @@ int pins3[] = {11,44,45};
 //How many time to loop the lights before returning to 0
 int lights_loop = 0;
 
+Ultrasonic distance;
+
 //setup runs once at the begining of the program
 void setup() {
   
@@ -49,6 +51,10 @@ void setup() {
   
   digitalWrite(STATUS_LED,LOW); 
   digitalWrite(SWITCH_POWER,HIGH);
+  
+  distance.set_pin_nums(21,23);
+  
+  pinMode(25,INPUT);
   
   LED_loop[0] = *new Loop();
   LED_loop[0].set_pins(pins0);
@@ -108,11 +114,16 @@ void loop() {
       LED_loop[1].set_led_rotation(LED_loop[1].current_rotation + 1);
       LED_loop[2].set_led_rotation(LED_loop[2].current_rotation + 1);
       LED_loop[3].set_led_rotation(LED_loop[3].current_rotation + 1);
+      --lights_loop;
     } else {
       LED_loop[0].set_static_on(0);
       LED_loop[1].set_static_on(0);
       LED_loop[2].set_static_on(0);
       LED_loop[3].set_static_on(0);
+      
+      if(distance.get_distance() > 25) {
+        lights_loop = 510*4;
+      }
     }
     
     delay(10);
