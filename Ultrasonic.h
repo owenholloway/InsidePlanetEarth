@@ -2,10 +2,10 @@
 #define ULTRASONIC_H
 
 class Ultrasonic {
-  private:
+  public:
     int trig_pin;
     int echo_pin;
-  public:
+    int distance;
     
     /*
     * Sets the pin's to be used by the SRF05.
@@ -23,3 +23,4 @@ class Ultrasonic {
 };
 
 #endif
+

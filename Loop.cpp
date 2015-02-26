@@ -34,3 +34,5 @@ void Loop::set_static_on(int brightness) {
   
   is_static_on = true;
 }
+
+
