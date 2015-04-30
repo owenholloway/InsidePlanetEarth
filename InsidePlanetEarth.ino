@@ -143,7 +143,7 @@ void loop() {
       int distance = pulseIn(ECHOPIN, HIGH);
       distance= distance/58;
       
-      if(distance < 100) {
+      if(distance < 400) {
         
         randomSeed(analogRead(0));
         randomSeed(random(1000));
